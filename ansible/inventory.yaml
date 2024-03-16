@@ -1,0 +1,14 @@
+openstack:
+  vars:
+    ansible_user: ubuntu
+  children:
+    servers:
+    agents:
+
+servers:
+  hosts:
+    tp-rk-0.fritz.box:
+
+agents:
+  hosts:
+    tp-rk-1.fritz.box:
