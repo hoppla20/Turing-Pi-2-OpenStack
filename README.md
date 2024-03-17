@@ -25,6 +25,11 @@ nvme0n1      232.9G disk
 
 ```sh
 cd ansible
+
+# generate ssh key
+mkdir -p "$(pwd)/files/ssh"
+ssh-keygen -t ed25519 -f "$(pwd)/files/ssh/id_ubuntu"
+
 ansible-playbook -i inventory.yaml preparations.playbook.yaml
 ```
 

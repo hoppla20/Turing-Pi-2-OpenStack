@@ -3,3 +3,6 @@ result
 
 # ansible
 *.retry
+
+# ssh keys
+id_*
