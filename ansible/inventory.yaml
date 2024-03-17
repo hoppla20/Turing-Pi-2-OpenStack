@@ -5,6 +5,17 @@ openstack:
     servers:
     agents:
 
+deploy:
+  vars:
+    kolla_serve_dir: /srv/kolla
+    kolla_config_dir: /etc/kolla
+    kolla_venv_dir: "{{ kolla_serve_dir }}/venv"
+    kolla_deploy_logs_dir: "/var/log/kolla-deploy"
+
+    kolla_venv_cmd: ". {{ kolla_serve_dir }}/venv/bin/activate"
+  hosts:
+    tp-rk-0.fritz.box:
+
 servers:
   hosts:
     tp-rk-0.fritz.box:

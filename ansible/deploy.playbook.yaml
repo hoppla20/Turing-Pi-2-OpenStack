@@ -1,0 +1,33 @@
+# vim: set ft=yaml.ansible
+
+- name: Deploy kolla-ansible
+  hosts: deploy
+
+  tags:
+    - kolla-deploy
+
+  tasks:
+    - name: Ensure that kolla-ansible dependencies are installed
+      ansible.builtin.shell: "{{ kolla_venv_cmd }} && kolla-ansible install-deps >{{ kolla_deploy_logs_dir }}/install-deps.log 2>{{ kolla_deploy_logs_dir }}/install-deps-error.log"
+      changed_when: true
+      tags: kolla-ansible-install-deps
+
+    - name: Kolla-ansible bootstrap-servers
+      ansible.builtin.shell: "{{ kolla_venv_cmd }} && kolla-ansible -i {{ kolla_serve_dir }}/inventory bootstrap-servers >{{ kolla_deploy_logs_dir }}/bootstrap-servers.log 2>{{ kolla_deploy_logs_dir }}/bootstrap-servers-error.log"
+      changed_when: true
+      tags: [deploy, kolla-ansible-bootstrap-servers]
+
+    - name: Kolla-ansible octavia-certificates
+      ansible.builtin.shell: "{{ kolla_venv_cmd }} && kolla-ansible octavia-certificates >{{ kolla_deploy_logs_dir }}/octavia-certificates.log 2>{{ kolla_deploy_logs_dir }}/octavia-certificates-error.log"
+      changed_when: true
+      tags: [deploy, kolla-ansible-octavia-certificates]
+
+    - name: Kolla-ansible prechecks
+      ansible.builtin.shell: "{{ kolla_venv_cmd }} && kolla-ansible -i {{ kolla_serve_dir }}/inventory prechecks >{{ kolla_deploy_logs_dir }}/prechecks.log 2>{{ kolla_deploy_logs_dir }}/prechecks-error.log"
+      changed_when: true
+      tags: [deploy, kolla-ansible-prechecks]
+
+    - name: Kolla-ansible deploy
+      ansible.builtin.shell: "{{ kolla_venv_cmd }} && kolla-ansible -i {{ kolla_serve_dir }}/inventory deploy >{{ kolla_deploy_logs_dir }}/deploy.log 2>{{ kolla_deploy_logs_dir }}/deploy-error.log"
+      changed_when: true
+      tags: [deploy, kolla-ansible-deploy]
