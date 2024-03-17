@@ -10,15 +10,15 @@
 ## Disk setup
 
 ```
-NAME           SIZE TYPE MOUNTPOINT      LABEL
-mmcblk0       29.1G disk                 
-├─mmcblk0p1    512M part /boot/firmware  system-boot
-└─mmcblk0p2   28.6G part /               writable
+NAME           SIZE TYPE MOUNTPOINT          LABEL
+mmcblk0       29.1G disk                     
+├─mmcblk0p1    512M part /boot/firmware      system-boot
+└─mmcblk0p2   28.6G part /                   writable
 mmcblk0boot0     4M disk                 
 mmcblk0boot1     4M disk                 
 nvme0n1      232.9G disk                 
-├─nvme0n1p1    115G part /var/lib/docker docker
-└─nvme0n1p2  117.9G part                                # lvm 'cinder-volumes'
+├─nvme0n1p1    115G part /var/lib/containers containers
+└─nvme0n1p2  117.9G part                                    # lvm 'cinder-volumes'
 ```
 
 ## Preparations
