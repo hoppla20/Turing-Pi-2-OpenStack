@@ -84,6 +84,14 @@
           when: netplan_config is changed
           changed_when: true
 
+    - name: Ensure that /var/lib/docker is present
+      ansible.builtin.file:
+        path: /var/lib/docker
+        state: directory
+        owner: root
+        group: root
+        mode: '0755'
+
 - name: Kolla-ansible preparations
   hosts: deploy
   gather_facts: false
@@ -176,3 +184,5 @@
         - name: Generate passwords
           ansible.builtin.shell: "{{ kolla_venv_cmd }} && kolla-genpwd"
           changed_when: true
+
+    # TODO ensure that /etc/kolla/config directory is up to date

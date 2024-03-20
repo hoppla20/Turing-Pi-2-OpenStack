@@ -39,7 +39,7 @@ workaround_ansible_issue_8743: yes
 #config_strategy: "COPY_ALWAYS"
 
 # Valid options are ['centos', 'debian', 'rocky', 'ubuntu']
-kolla_base_distro: "debian"
+kolla_base_distro: "ubuntu"
 
 # Do not override this unless you know what you are doing.
 #openstack_release: "2023.2"
@@ -163,7 +163,7 @@ neutron_external_interface: "veth2"
 # if vmware_nsxv3 or vmware_nsxp is selected, enable_openvswitch MUST be set to "no" (default is yes)
 # Do note linuxbridge is *EXPERIMENTAL* in Neutron since Zed and it requires extra tweaks to config to be usable.
 # For details, see: https://docs.openstack.org/neutron/latest/admin/config-experimental-framework.html
-neutron_plugin_agent: "ovn"
+neutron_plugin_agent: "openvswitch"
 
 # Valid options are [ internal, infoblox ]
 #neutron_ipam_driver: "internal"
@@ -342,6 +342,7 @@ enable_cinder_backend_lvm: "yes"
 #enable_collectd: "no"
 #enable_cyborg: "no"
 enable_designate: "yes"
+neutron_dns_domain: "vincentcui.test."
 #enable_destroy_images: "no"
 #enable_etcd: "no"
 #enable_fluentd: "yes"
@@ -420,7 +421,7 @@ octavia_provider_drivers: "amphora"
 #enable_placement: "{{ enable_nova | bool or enable_zun | bool }}"
 enable_prometheus: "yes"
 #enable_proxysql: "no"
-#enable_redis: "no"
+enable_redis: "yes"
 #enable_sahara: "no"
 #enable_senlin: "no"
 enable_skyline: "yes"
@@ -636,12 +637,10 @@ designate_ns_record:
 # Neutron - networking options
 ##############################
 # Enable distributed floating ip for OVN deployments
-neutron_ovn_distributed_fip: "yes"
+#neutron_ovn_distributed_fip: "no"
 
 # Enable DHCP agent(s) to use with OVN
-neutron_ovn_dhcp_agent: "yes"
-
-neutron_dns_domain: "vincentcui.test."
+#neutron_ovn_dhcp_agent: "no"
 
 #############################
 # Horizon - Dashboard Options
